@@ -3,6 +3,7 @@ from typing import Any
 from attrs import define
 from decouple import config
 
+from blackjack.datasets.base_dataset import BaseDataset
 from blackjack.train.engine.losses import get_loss_function
 from blackjack.train.engine.metrics import get_metrics
 from blackjack.train.engine.optimizers import get_optimizer
@@ -12,7 +13,12 @@ from blackjack.train.trainers.trainer_interface import TrainerInterface
 @define
 class DefaultTrainer(TrainerInterface):
     model: Any
-    dataset: Any
+    
+    dataset: BaseDataset = BaseDataset(
+        config('TRAIN_PATH', cast=str),
+        config('VALIDATION_PATH', cast=str),
+        config('TEST_PATH', cast=str),
+    )
 
     epochs: int = config('EPOCHS', cast=int)
     history: dict = {}
@@ -26,9 +32,7 @@ class DefaultTrainer(TrainerInterface):
 
     def _fit(self) -> None:
         self.history = self.model.fit(
-            self.dataset['train'], epochs=self.epochs, validation_data=self.dataset['validation']
+            self.dataset.get_train(),
+            epochs=self.epochs,
+            validation_data=self.dataset.get_validation(),
         )
-
-
-if __name__ == '__main__':
-    trainer = DefaultTrainer(None, None)
