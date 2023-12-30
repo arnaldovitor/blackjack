@@ -13,7 +13,7 @@ from blackjack.train.trainers.trainer_interface import TrainerInterface
 @define
 class DefaultTrainer(TrainerInterface):
     model: Any
-    
+
     dataset: BaseDataset = BaseDataset(
         config('TRAIN_PATH', cast=str),
         config('VALIDATION_PATH', cast=str),

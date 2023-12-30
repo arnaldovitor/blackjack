@@ -3,7 +3,7 @@ from typing import Any
 from decouple import Csv, config
 from loguru import logger
 
-_AVAILABLE_METRICS = {'accuracy': None}
+_AVAILABLE_METRICS: dict = {'accuracy': None}
 
 
 def get_metrics() -> Any:

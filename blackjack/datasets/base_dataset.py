@@ -15,7 +15,7 @@ class BaseDataset(DatasetInterface):
     _validation_genetator: ImageDataGenerator = field(init=False)
     _test_generator: ImageDataGenerator = field(init=False)
 
-    def __attrs_post_init__(self):
+    def __attrs_post_init__(self) -> None:
         self._train_generator = get_complex_generator(self.train_path)
         self._validation_generator = get_simple_generator(self.validation_path)
         self._test_generator = get_simple_generator(self.test_path)
