@@ -11,7 +11,7 @@ attrs = "^23.1.0"
 python-decouple = "^3.8"
 numpy = "~1.24.4"
 tensorflow-io-gcs-filesystem = "0.27.0"
-tensorflow = "2.10.0"
+tensorflow = "2.11.1"
 loguru = "^0.7.2"
 
 
