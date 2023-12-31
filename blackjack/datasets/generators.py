@@ -32,7 +32,7 @@ def get_simple_generator(split_path: str) -> ImageDataGenerator:
 
     generator = datagen.flow_from_directory(
         split_path,
-        target_size=config('TARGET_SIZE', cast=tuple, default=(224, 224)),
+        target_size=parse_target_size(config('TARGET_SIZE', cast=tuple, default='224, 224')),
         batch_size=config('BATCH_SIZE', cast=int, default=32),
         class_mode=config('CLASS_MODE', cast=str, default='categorical'),
     )
