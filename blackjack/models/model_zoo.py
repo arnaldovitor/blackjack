@@ -10,6 +10,12 @@ _AVAILABLE_MODELS: dict = {'mobilenet': MobileNet}
 
 
 def get_model() -> Any:
+    """Retrieves and initializes the specified model based on configuration parameters.
+
+    Returns:
+        An instance of the selected model.
+
+    """
     target_model = config('MODEL', cast=str)
     try:
         selected_model = _AVAILABLE_MODELS[target_model]

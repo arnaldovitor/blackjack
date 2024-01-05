@@ -14,6 +14,9 @@ from blackjack.train.trainers.trainer_interface import TrainerInterface
 
 @define
 class DefaultTrainer(TrainerInterface):
+    """Default trainer for producing classification models via TensorFlow
+
+    """
     model_wrapper: Any = get_model()
 
     dataset: BaseDataset = BaseDataset(
@@ -30,6 +33,7 @@ class DefaultTrainer(TrainerInterface):
     metrics: Any = get_metrics()
 
     def _compile(self) -> None:
+        """Compiles the model for training."""
         try:
             self.model_wrapper.model.compile(
                 optimizer=self.optimizer, loss=self.loss, metrics=self.metrics
@@ -39,6 +43,7 @@ class DefaultTrainer(TrainerInterface):
             logger.error(f'Error during model compilation: {e}')
 
     def _fit(self) -> None:
+        """Fits the compiled model to the training data."""
         logger.info('Training started.')
         try:
             self.history = self.model_wrapper.model.fit(
@@ -50,5 +55,6 @@ class DefaultTrainer(TrainerInterface):
             logger.error(f'Error during model training: {e}')
 
     def start_train(self) -> None:
+        """Starts the model training process."""
         self._compile()
         self._fit()
