@@ -14,9 +14,8 @@ from blackjack.train.trainers.trainer_interface import TrainerInterface
 
 @define
 class DefaultTrainer(TrainerInterface):
-    """Default trainer for producing classification models via TensorFlow
+    """Default trainer for producing classification models via TensorFlow."""
 
-    """
     model_wrapper: Any = get_model()
 
     dataset: BaseDataset = BaseDataset(

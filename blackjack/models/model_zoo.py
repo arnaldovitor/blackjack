@@ -4,7 +4,7 @@ from decouple import config
 from loguru import logger
 
 from blackjack.models.mobilenet import MobileNet
-from blackjack.utils.parsers import parse_target_size
+from blackjack.utils.parsers import string_to_tuple
 
 _AVAILABLE_MODELS: dict = {'mobilenet': MobileNet}
 
@@ -24,5 +24,5 @@ def get_model() -> Any:
 
     return selected_model(
         config('NUM_CLASSES', cast=int),
-        parse_target_size(config('TARGET_SIZE', default='224,224,3')),
+        string_to_tuple(config('TARGET_SIZE', default='224,224,3')),
     )
