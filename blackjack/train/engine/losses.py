@@ -15,7 +15,6 @@ def get_loss_function() -> Any:
     """
     try:
         selected_loss_function = _AVAILABLE_LOSSES[config('LOSS')]
+        return selected_loss_function
     except Exception:
         logger.error(f"Loss function: {config('LOSS')} not available.")
-
-    return selected_loss_function

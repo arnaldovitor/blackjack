@@ -1,7 +1,5 @@
-from decouple import config
+from decouple import Csv, config
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
-
-from blackjack.utils.parsers import string_to_tuple
 
 
 def get_complex_generator(split_path: str) -> ImageDataGenerator:
@@ -27,7 +25,7 @@ def get_complex_generator(split_path: str) -> ImageDataGenerator:
 
     generator = datagen.flow_from_directory(
         split_path,
-        target_size=string_to_tuple(config('TARGET_SIZE', default='224,224')),
+        target_size=config('TARGET_SIZE', default='224,224', cast=Csv(int)),
         batch_size=config('BATCH_SIZE', cast=int, default=32),
         class_mode=config('CLASS_MODE', cast=str, default='categorical'),
     )
@@ -52,7 +50,7 @@ def get_simple_generator(split_path: str) -> ImageDataGenerator:
 
     generator = datagen.flow_from_directory(
         split_path,
-        target_size=string_to_tuple(config('TARGET_SIZE', cast=tuple, default='224, 224')),
+        target_size=config('TARGET_SIZE', cast=Csv(int), default='224, 224'),
         batch_size=config('BATCH_SIZE', cast=int, default=32),
         class_mode=config('CLASS_MODE', cast=str, default='categorical'),
     )

@@ -19,10 +19,9 @@ def get_model() -> Any:
     target_model = config('MODEL', cast=str)
     try:
         selected_model = _AVAILABLE_MODELS[target_model]
+        return selected_model(
+            config('NUM_CLASSES', cast=int),
+            string_to_tuple(config('TARGET_SIZE', default='224,224,3')),
+        )
     except Exception:
         logger.error(f'Model {target_model} not available.')
-
-    return selected_model(
-        config('NUM_CLASSES', cast=int),
-        string_to_tuple(config('TARGET_SIZE', default='224,224,3')),
-    )
