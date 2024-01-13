@@ -17,5 +17,5 @@ from blackjack.train.trainers.default_trainer import DefaultTrainer
 
 
 @pytest.fixture
-def default_trainer():
+def default_trainer() -> DefaultTrainer:
     return DefaultTrainer()
